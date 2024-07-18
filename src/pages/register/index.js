@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import axios from 'axios';
+import { BACKEND_ADDRESS } from '../../config';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://35.154.147.95:5000/register', formData);
+      const response = await axios.post(`${BACKEND_ADDRESS}/register`, formData);
       setMessage('Registration successful. Redirecting to login...');
       setTimeout(() => {
         navigate('/login');

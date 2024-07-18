@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import { BACKEND_ADDRESS } from '../../config';
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -11,7 +12,8 @@ const LoginForm = () => {
     e.preventDefault();
     setError('');
     try {
-      const apiURL = 'http://3.110.94.253:5000/login';
+      const apiURL = `${BACKEND_ADDRESS}/login`;
+      {/*const apiURL = 'http://3.110.94.253:5000/login';*/}
       const response = await axios.post(apiURL, credentials);
       const { password, ...safeUserData } = response.data;
       if (!safeUserData.name) {

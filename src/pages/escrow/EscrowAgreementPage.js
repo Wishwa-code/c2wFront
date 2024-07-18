@@ -10,6 +10,7 @@ import CreateTransactionPopup from "../../components/CreateTransactionPopup.js";
 import { PencilIcon } from "@heroicons/react/24/solid";
 import { ArrowDownTrayIcon, MagnifyingGlassIcon,} from "@heroicons/react/24/outline";
 import {Card, CardHeader, Typography, Button, CardBody, Chip, CardFooter, Avatar, IconButton, Tooltip, Input,} from "@material-tailwind/react";
+import { BACKEND_ADDRESS } from '../../config.js';
 
 const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "Account", ""];
 
@@ -37,7 +38,7 @@ const EscrowAgreementPage = () => {
   useEffect(() => {
     const fetchtransactions = async () => {
       try {
-        const response = await axios.get(`http://localhost:5001/fetch_transaction_data`, {});
+        const response = await axios.get(`${BACKEND_ADDRESS}/fetch_transaction_data`, {});
         const transactions = response.data;
         console.log(transactions)
         setTransactions(transactions)
@@ -54,7 +55,7 @@ const EscrowAgreementPage = () => {
       console.log(updatedTransaction.status);
       console.log(updatedTransaction.userId); // Access the userId
 
-      const response = await axios.put('http://localhost:5001/update_transaction_status', {
+      const response = await axios.put(`${BACKEND_ADDRESS}/update_transaction_status`, {
           transactionId: updatedTransaction._id,
           newStatus: updatedTransaction.status,
           userId: updatedTransaction.userId, // Include userId in the request
@@ -74,7 +75,7 @@ const EscrowAgreementPage = () => {
 
   const fetchtransactions = async () => {
     try {
-      const response = await axios.get(`http://localhost:5001/fetch_transaction_data`, {});
+      const response = await axios.get(`${BACKEND_ADDRESS}/fetch_transaction_data`, {});
       const transactions = response.data;
       console.log(transactions);
       setTransactions(transactions); // Update the state with fresh data

@@ -8,6 +8,8 @@ import Sidebar, { SidebarItem } from "../../components/Sidebar"
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid';
 import { Line } from 'react-chartjs-2';
 import { jwtDecode } from 'jwt-decode'; 
+import { BACKEND_ADDRESS } from '../../config';
+
 
 
 // Register components required for Line chart
@@ -32,14 +34,14 @@ const StockData = () => {
     if (country && productID) {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`http://localhost:5001/fetch_chart_data`, {
+          const response = await axios.get(`${BACKEND_ADDRESS}/fetch_chart_data`, {
             params: { country: country, product_id: productID }
           });
           const transformedData = transformChartData(response.data);
           setChartData(transformedData);
           
 
-          const response2 = await axios.get(`http://localhost:5001/fetch_analyzed_data`, {
+          const response2 = await axios.get(`${BACKEND_ADDRESS}/fetch_analyzed_data`, {
             params: { product_id: productID }
           });
 

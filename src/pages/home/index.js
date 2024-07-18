@@ -5,6 +5,7 @@ import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid';
 import { Settings } from "lucide-react";
 import Sidebar, { SidebarItem } from "../../components/Sidebar"
 import '../../styles.css';
+import { BACKEND_ADDRESS } from '../../config';
 
 const Dashboard = () => {
   const [menuOpen, setMenuOpen] = useState(false);

@@ -12,6 +12,7 @@ import Sidebar, { SidebarItem } from "../../components/Sidebar"
 import { Layout, Row, Col, message, Button } from 'antd';
 import { Card as Carddup } from 'antd';
 import {CardBody, Tabs, TabsHeader, TabsBody, Tab, TabPanel} from "@material-tailwind/react";
+import { BACKEND_ADDRESS } from '../../config';
 
 
 
@@ -65,7 +66,7 @@ const NewsComponent = () => {
       };
       console.log(bookmarkData)
 
-      const response = await axios.post('http://localhost:5001/api/bookmark', bookmarkData);
+      const response = await axios.post(`${BACKEND_ADDRESS}/api/bookmark`, bookmarkData);
       
       // Update the bookmarked state in the UI
       setNewsArticles(prevArticles => prevArticles.map(item => 
@@ -89,7 +90,7 @@ const NewsComponent = () => {
       };
       console.log(bookmarkData)
 
-      const response = await axios.post('http://localhost:5001/api/bookmark', bookmarkData);
+      const response = await axios.post(`${BACKEND_ADDRESS}/api/bookmark`, bookmarkData);
     
 
       set_bookmarked_articles(prevBookmarks => {
@@ -146,7 +147,7 @@ useEffect(() => {
     // Fetch bookmarks only when userId is available
     const fetchBookmarks = async () => { 
       try {
-        const response = await axios.get(`http://localhost:5001/api/get_bookmarks?userId=${userInfo.identity}`);
+        const response = await axios.get(`${BACKEND_ADDRESS}/api/get_bookmarks?userId=${userInfo.identity}`);
         const bookmarked_articles = response.data;
         set_bookmarked_articles(bookmarked_articles);
         console.log("Fetched bookmarks:", bookmarked_articles);
@@ -176,7 +177,7 @@ useEffect(() => {
   
       try {
         const categoriesParam = country// Default to exclude general and sports if nothing selected
-        const apiUrl = `http://localhost:5001/api/news?page=${page}&categories=${categoriesParam}&sort=${productID}&userId=${userInfo.identity}`;
+        const apiUrl = `${BACKEND_ADDRESS}/api/news?page=${page}&categories=${categoriesParam}&sort=${productID}&userId=${userInfo.identity}`;
         const response = await fetch(apiUrl);
   
         if (!response.ok) {
